@@ -1,0 +1,30 @@
+# Ignore composer dependencies
+/vendor/
+
+# Ignore core WordPress files
+/wp-admin/
+/wp-includes/
+
+# Ignore WordPress core content that doesn’t need to be versioned
+/index.php
+/license.txt
+/readme.html
+/xmlrpc.php
+/wp-*.php
+!wp-config.php
+
+# Ignore wp-content except for themes and plugins you want to version
+wp-content/upgrade*
+/wp-content/cache/
+/wp-content/uploads/
+/wp-content/plugins/
+
+# Allow custom themes and plugins in wp-content
+wp-content/*
+!wp-content/themes
+wp-content/themes/*
+!wp-content/themes/headless-theme
+
+# Environment files
+.env*
+!/.env.example
