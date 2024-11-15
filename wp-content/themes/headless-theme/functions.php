@@ -47,10 +47,15 @@ function get_custom_tile_fields() {
 
 // Disable all default REST API endpoints except for the custom 'tiles' endpoint
 add_filter('rest_endpoints', function ($endpoints) {
+    // Check if the request is from the admin area
+    if (is_admin()) {
+        return $endpoints;
+    }
+
     // Unset all default endpoints
     foreach ($endpoints as $route => $endpoint) {
-        // Only allow the custom /custom/v1/tiles endpoint
-        if (strpos($route, REST_ROUTE_NAMESPACE . REST_ROUTE_NAME) !== 0) {
+        // Only allow the custom /lala/v1/tiles endpoint
+        if (strpos($route, REST_ROUTE_NAMESPACE) === false) {
             unset($endpoints[$route]);
         }
     }
