@@ -47,7 +47,7 @@ function get_custom_tile_fields() {
 // Disable all default REST API endpoints except for the custom 'tiles' endpoint
 add_filter('rest_endpoints', function ($endpoints) {
     // Check if the request is from the admin area
-    if (is_admin()) {
+    if (is_user_logged_in()) {
         return $endpoints;
     }
 
