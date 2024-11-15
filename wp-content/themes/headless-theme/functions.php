@@ -1,6 +1,5 @@
 <?php
-
-const REST_ROUTE_NAMESPACE = '/lala/v1/';
+const REST_ROUTE_NAMESPACE = 'lala/v1';
 const REST_ROUTE_NAME = 'tiles';
 
 // Redirect all requests to the homepage
