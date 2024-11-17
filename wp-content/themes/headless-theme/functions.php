@@ -36,7 +36,6 @@ function get_custom_tile_fields() {
         $custom_fields = get_fields($tile->ID);  // Fetch all custom fields
         
         $data[] = [
-            'id' => $tile->ID,
             'title' => get_the_title($tile->ID),
             'acf' => $custom_fields,  // Output only custom fields
         ];
