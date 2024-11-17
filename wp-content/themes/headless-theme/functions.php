@@ -27,6 +27,7 @@ function get_custom_tile_fields() {
     $tiles = get_posts([
         'post_type' => 'tile',
         'posts_per_page' => -1,
+        'order' => 'ASC',
     ]);
 
     $data = [];
