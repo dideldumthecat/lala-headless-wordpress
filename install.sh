@@ -21,3 +21,6 @@ wp plugin install advanced-custom-fields
 
 # Remove all other themes except the headless theme
 wp theme list --status=inactive --field=name | grep -v "$MY_THEME" | xargs -I {} wp theme delete {}
+
+# Import the database dump
+wp db import db-export.sql
