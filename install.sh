@@ -10,8 +10,8 @@ set +a
 
 ${COMPOSER_COMMAND}
 
-wp core download --path=/var/www/html --locale=en_US
-wp core install --path=/var/www/html --url="$WP_SITE_URL" --title="$WP_SITE_TITLE" --admin_user="$WP_ADMIN_USER" --admin_password="$WP_ADMIN_PASS" --admin_email="$WP_ADMIN_EMAIL"
+wp core download --path=./ --locale=en_US
+wp core install --path=./ --url="$WP_SITE_URL" --title="$WP_SITE_TITLE" --admin_user="$WP_ADMIN_USER" --admin_password="$WP_ADMIN_PASS" --admin_email="$WP_ADMIN_EMAIL"
 
 # Install the Advanced Custom Fields plugin
 wp plugin install advanced-custom-fields
