@@ -1,17 +1,14 @@
 #!/bin/bash
 
+# Enable debugging and logging
+#set -x
+
 # Load environment variables from the .env file
-export $(grep -v '^#' .env | xargs)
+set -a
+source .env
+set +a
 
-# Set WordPress site URL, title, admin username and password from the .env file
-WP_SITE_URL="$WP_HOME/"
-WP_SITE_TITLE="$WP_SITE_TITLE"
-WP_ADMIN_USER="$WP_ADMIN_USER"
-WP_ADMIN_PASS="$WP_ADMIN_PASS"
-WP_ADMIN_EMAIL="$WP_ADMIN_EMAIL"
-MY_THEME="headless-theme"
-
-composer install
+${COMPOSER_COMMAND}
 
 wp core download --path=/var/www/html --locale=en_US
 wp core install --path=/var/www/html --url="$WP_SITE_URL" --title="$WP_SITE_TITLE" --admin_user="$WP_ADMIN_USER" --admin_password="$WP_ADMIN_PASS" --admin_email="$WP_ADMIN_EMAIL"
