@@ -1,4 +1,4 @@
-.env.production
+.env
 .ddev
 .git
 .gitignore
