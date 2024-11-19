@@ -1,0 +1,7 @@
+.env.production
+.ddev
+.git
+.gitignore
+.github
+key.pem
+known_hosts
