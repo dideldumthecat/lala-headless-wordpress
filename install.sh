@@ -3,9 +3,13 @@
 # Enable debugging and logging
 #set -x
 
-# Load environment variables from the .env file
+# Load environment variables from the .env or .env.production file
 set -a
-source .env
+if [ -f .env ]; then
+    source .env
+elif [ -f .env.production ]; then
+    source .env.production
+fi
 set +a
 
 ${COMPOSER_COMMAND}
