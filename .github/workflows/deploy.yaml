@@ -1,0 +1,43 @@
+name: Deploy and install
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: IONOS
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Add Known Host Key
+        env:
+          KNOWN_HOST_KEY: ${{ secrets.KNOWN_HOST_KEY }}
+        run: |
+          echo "$KNOWN_HOST_KEY" > known_hosts
+          chmod 644 known_hosts
+
+      - name: Save SSH private key
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        run: |
+          echo "$SSH_PRIVATE_KEY" > key.pem
+          chmod 600 key.pem
+
+      - name: Deploy to server via SFTP
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_SSH_PRIVATE_KEY }}
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_USERNAME: ${{ secrets.SSH_USERNAME }}
+          REMOTE_PATH: ${{ secrets.REMOTE_PATH }}
+        run: |
+        rsync -avz --delete --exclude '.env.production' -e "ssh -i key.pem -o UserKnownHostsFile=known_hosts" ./ $SSH_USERNAME@$SSH_HOST:$REMOTE_PATH
+        ssh -i key.pem -o UserKnownHostsFile=known_hosts $SSH_USERNAME@$SSH_HOST "cd $REMOTE_PATH && bash install.sh"
+
+      - name: Clean up
+        run |
+        rm key.pem
+        rm known_hosts
