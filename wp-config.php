@@ -50,6 +50,7 @@ define( 'WPMS_SMTP_PORT', $_ENV['WPMS_SMTP_PORT'] );
 define( 'WPMS_SSL', $_ENV['WPMS_SSL'] === 'true' );
 define( 'WPMS_SMTP_AUTH', $_ENV['WPMS_SMTP_AUTH'] === 'true' );
 define( 'WPMS_SMTP_USER', $_ENV['WPMS_SMTP_USER'] );
+define( 'WPMS_SMTP_PASS', $_ENV['WPMS_SMTP_PASS'] );
 
 // Disable the plugin and theme editor
 define( 'DISALLOW_FILE_EDIT', true );
