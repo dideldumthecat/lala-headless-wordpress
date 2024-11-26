@@ -40,6 +40,9 @@ define( 'WP_SITEURL', WP_HOME . '/' );
 // Wordpress auto-update configuration
 define( 'WP_AUTO_UPDATE_CORE', 'minor' );
 
+// Disable the plugin and theme editor
+define( 'DISALLOW_FILE_EDIT', true );
+
 /**
  * Set WordPress Database Table prefix if not already set.
  *
