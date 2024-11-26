@@ -20,5 +20,5 @@ wp plugin install wp-mail-smtp --activate
 # Remove all other plugins except the ACF and SMTP plugins
 wp plugin list --status=inactive --field=name | grep -v "wp-mail-smtp" | grep -v "advanced-custom-fields" | xargs -I {} wp plugin delete {}
 
-# Import the database dump
-wp db import db-export.sql
+# Remove all other themes except the headless theme
+wp theme list --status=inactive --field=name | grep -v "$MY_THEME" | xargs -I {} wp theme delete {}
