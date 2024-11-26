@@ -22,3 +22,6 @@ wp plugin list --status=inactive --field=name | grep -v "wp-mail-smtp" | grep -v
 
 # Remove all other themes except the headless theme
 wp theme list --status=inactive --field=name | grep -v "$MY_THEME" | xargs -I {} wp theme delete {}
+
+# For local development
+# wp user update admin --user_pass=admin
