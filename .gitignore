@@ -28,3 +28,6 @@ wp-content/themes/*
 # Environment files
 .env*
 !/.env.example
+
+# Database backups
+*.sql
