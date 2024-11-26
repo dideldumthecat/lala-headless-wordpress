@@ -40,6 +40,17 @@ define( 'WP_SITEURL', WP_HOME . '/' );
 // Wordpress auto-update configuration
 define( 'WP_AUTO_UPDATE_CORE', 'minor' );
 
+// Configure the wp-mail-smtp plugin
+define( 'WPMS_ON', true );
+define( 'WPMS_MAIL_FROM', $_ENV['WPMS_MAIL_FROM'] );
+define( 'WPMS_MAIL_FROM_NAME', $_ENV['WPMS_MAIL_FROM_NAME'] );
+define( 'WPMS_MAILER', 'smtp' );
+define( 'WPMS_SMTP_HOST', $_ENV['WPMS_SMTP_HOST'] );
+define( 'WPMS_SMTP_PORT', $_ENV['WPMS_SMTP_PORT'] );
+define( 'WPMS_SSL', $_ENV['WPMS_SSL'] === 'true' );
+define( 'WPMS_SMTP_AUTH', $_ENV['WPMS_SMTP_AUTH'] === 'true' );
+define( 'WPMS_SMTP_USER', $_ENV['WPMS_SMTP_USER'] );
+
 // Disable the plugin and theme editor
 define( 'DISALLOW_FILE_EDIT', true );
 
