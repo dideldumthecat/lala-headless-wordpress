@@ -8,7 +8,7 @@ add_action('template_redirect', function() {
         (!defined('REST_REQUEST') || !REST_REQUEST) && 
         $_SERVER['REQUEST_URI'] !== '/'
     ) {
-        wp_redirect(home_url('/'));
+            wp_redirect(home_url('/'));
         exit;
     }
 });
@@ -53,7 +53,6 @@ add_filter('rest_endpoints', function ($endpoints) {
 
     // Unset all default endpoints
     foreach ($endpoints as $route => $endpoint) {
-        // Only allow the custom /lala/v1/tiles endpoint
         if (strpos($route, REST_ROUTE_NAMESPACE) === false) {
             unset($endpoints[$route]);
         }
