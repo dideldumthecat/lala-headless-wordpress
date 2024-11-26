@@ -59,3 +59,6 @@ add_filter('rest_endpoints', function ($endpoints) {
     }
     return $endpoints;
 });
+
+# Enable auto-updates for all plugins
+add_filter( 'auto_update_plugin', '__return_true' );

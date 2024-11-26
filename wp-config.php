@@ -39,7 +39,6 @@ define( 'WP_SITEURL', WP_HOME . '/' );
 
 // Wordpress auto-update configuration
 define( 'WP_AUTO_UPDATE_CORE', 'minor' );
-define( 'WP_AUTO_UPDATE_PLUGINS', true );
 
 /**
  * Set WordPress Database Table prefix if not already set.
