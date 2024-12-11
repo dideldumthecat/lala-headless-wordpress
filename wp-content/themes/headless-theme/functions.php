@@ -20,6 +20,11 @@ add_action('rest_api_init', function () {
         'callback' => 'get_custom_tile_fields',
         'permission_callback' => '__return_true',
     ]);
+
+    // Enable gzip compression for the custom endpoint
+    if (ob_start('ob_gzhandler')) {
+        ob_start();
+    }
 });
 
 // Callback function for fetching custom fields only
