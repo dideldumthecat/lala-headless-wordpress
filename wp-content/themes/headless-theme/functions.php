@@ -2,6 +2,9 @@
 const REST_ROUTE_NAMESPACE = 'lala/v1';
 const REST_ROUTE_NAME = 'tiles';
 
+# Enable auto-updates for all plugins
+add_filter( 'auto_update_plugin', '__return_true' );
+
 // Redirect all requests to the homepage
 add_action('template_redirect', function() {
     if (
@@ -65,5 +68,3 @@ add_filter('rest_endpoints', function ($endpoints) {
     return $endpoints;
 });
 
-# Enable auto-updates for all plugins
-add_filter( 'auto_update_plugin', '__return_true' );
