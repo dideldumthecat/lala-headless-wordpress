@@ -1,6 +1,7 @@
 <?php
 const REST_ROUTE_NAMESPACE = 'lala/v1';
 const REST_ROUTE_NAME = 'tiles';
+const CACHE_FILE_PATH = '/cache/tiles.json';
 
 # Enable auto-updates for all plugins
 add_filter( 'auto_update_plugin', '__return_true' );
@@ -20,7 +21,7 @@ add_action('template_redirect', function() {
 add_action('rest_api_init', function () {
     register_rest_route(REST_ROUTE_NAMESPACE, '/' . REST_ROUTE_NAME, [
         'methods' => 'GET',
-        'callback' => 'get_custom_tile_fields',
+        'callback' => 'get_cached_tiles',
         'permission_callback' => '__return_true',
     ]);
 
@@ -30,7 +31,7 @@ add_action('rest_api_init', function () {
     }
 });
 
-// Callback function for fetching custom fields only
+// Retrieve the custom fields for all 'tile' custom post type entries
 function get_custom_tile_fields() {
     $tiles = get_posts([
         'post_type' => 'tile',
@@ -49,8 +50,41 @@ function get_custom_tile_fields() {
         ];
     }
 
-    return rest_ensure_response($data);
+    return $data;
 }
+
+# Implement caching for the custom REST API endpoint with a JSON file
+function get_cached_tiles() {
+    $file_path = wp_upload_dir()['basedir'] . CACHE_FILE_PATH;
+
+    if (file_exists($file_path)) {
+        return json_decode(file_get_contents($file_path), true);
+    }
+
+    return set_cached_tiles();
+}
+
+function set_cached_tiles() {
+    $file_path = wp_upload_dir()['basedir'] . CACHE_FILE_PATH;
+    $data = get_custom_tile_fields();
+
+    // Create the cache directory if it doesn't exist
+    if (!file_exists(dirname($file_path))) {
+        mkdir(dirname($file_path), 0755, true);
+    }
+
+    file_put_contents($file_path, json_encode($data));
+    return $data;
+}
+
+// Hook to recreate the cache JSON file when a 'tile' post type is updated
+add_action('wp_after_insert_post', function ($post_id, $post, $update) {
+    if ($post->post_type !== 'tile') {
+        return;
+    }
+
+    set_cached_tiles();
+}, 10, 3);
 
 // Disable all default REST API endpoints except for the custom 'tiles' endpoint
 add_filter('rest_endpoints', function ($endpoints) {
